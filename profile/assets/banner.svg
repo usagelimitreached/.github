@@ -1,72 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" role="img" aria-label="usage limit reached">
   <!--
-    "the leak" — one 13s loop:
-    github-dark normal  ->  panel slips to an agent trace  ->  > you're absolutely right.
-    ->  429 usage limit reached  ->  glitch  ->  snap to paper brand card.
+    "the leak" v2 — ~14.5s loop:
+    code lines print slowly -> 429 usage limit reached (hold 2s)
+    -> split-second flash: USAGE LIMIT REACHED + 100% bar
+    -> back to terminal (2s) -> snap to brand (hold 5s) -> loop.
     pure SMIL. animates as an <img> on github.
   -->
   <defs>
-    <style>
-      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
-    </style>
+    <style>.mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }</style>
   </defs>
 
   <!-- ===== BACKGROUNDS ===== -->
   <rect width="880" height="260" fill="#0d1117">
-    <animate attributeName="opacity" values="1;1;0;1;0;0" keyTimes="0;0.556;0.566;0.576;0.60;1" dur="13s" calcMode="discrete" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;1;0;1;0;0" keyTimes="0;0.628;0.636;0.645;0.655;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
   </rect>
   <rect width="880" height="260" fill="#F1E9D9">
-    <animate attributeName="opacity" values="0;0;1;0;1;1" keyTimes="0;0.556;0.566;0.576;0.60;1" dur="13s" calcMode="discrete" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;0;1;1" keyTimes="0;0.628;0.636;0.645;0.655;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
   </rect>
 
-  <!-- ===== SCENE A : normal github render ===== -->
-  <g opacity="0">
-    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.14;0.17;1" dur="13s" repeatCount="indefinite"/>
-    <text x="28" y="40" class="mono" font-size="15" fill="#7d8590">▾ README.md</text>
-    <rect x="28" y="64" width="540" height="13" rx="3" fill="#21262d"/>
-    <rect x="28" y="92" width="660" height="13" rx="3" fill="#21262d"/>
-    <rect x="28" y="120" width="470" height="13" rx="3" fill="#21262d"/>
-    <rect x="28" y="148" width="610" height="13" rx="3" fill="#21262d"/>
-    <rect x="28" y="176" width="380" height="13" rx="3" fill="#21262d"/>
-    <rect x="-160" y="56" width="160" height="150" fill="#ffffff" opacity="0.05">
-      <animate attributeName="x" values="-160;900" keyTimes="0;1" dur="1.9s" repeatCount="indefinite"/>
-    </rect>
+  <!-- ===== TERMINAL (phase 1 print + hold, and phase 3 replay) ===== -->
+  <g>
+    <animate attributeName="opacity" values="0;1;0;1;0;0" keyTimes="0;0.041;0.476;0.497;0.634;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
+    <text x="28" y="40" class="mono" font-size="15.5" fill="#7d8590" opacity="0">$ ./github render usagelimitreached/.github
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.035;0.041;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="70" class="mono" font-size="15.5" fill="#7d8590" opacity="0">[orchestrator] spawning agent…
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.084;0.090;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="100" class="mono" font-size="15.5" fill="#3fb950" opacity="0">[tool] render_readme() → ok
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.132;0.138;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="130" class="mono" font-size="15.5" fill="#C15F3C" opacity="0">&gt; you're absolutely right.
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.180;0.186;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="160" class="mono" font-size="15.5" fill="#7d8590" opacity="0">[agent] reticulating splines…
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.228;0.234;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="190" class="mono" font-size="15.5" fill="#7d8590" opacity="0">model: opus ▮   ctx 198k / 200k
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.277;0.283;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
+    <text x="28" y="222" class="mono" font-size="16" font-weight="700" fill="#f85149" opacity="0">429 — usage limit reached
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.332;0.338;1" dur="14.5s" repeatCount="indefinite"/>
+    </text>
   </g>
 
-  <!-- ===== SCENE B : the leak / agent trace ===== -->
-  <text x="28" y="40" class="mono" font-size="15.5" fill="#7d8590" opacity="0">$ ./github render usagelimitreached/.github
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.169;0.177;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="70" class="mono" font-size="15.5" fill="#7d8590" opacity="0">[orchestrator] spawning agent…
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.2;0.208;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="100" class="mono" font-size="15.5" fill="#3fb950" opacity="0">[tool] render_readme() → ok
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.23;0.238;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="130" class="mono" font-size="15.5" fill="#C15F3C" opacity="0">&gt; you're absolutely right.
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.269;0.277;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="160" class="mono" font-size="15.5" fill="#7d8590" opacity="0">[agent] reticulating splines…
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.307;0.315;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="190" class="mono" font-size="15.5" fill="#7d8590" opacity="0">model: opus ▮   ctx 198k / 200k
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.346;0.354;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
-  <text x="28" y="222" class="mono" font-size="16" font-weight="700" fill="#f85149" opacity="0">429 — usage limit reached
-    <animate attributeName="opacity" values="0;0;1;1;1;0;0" keyTimes="0;0.407;0.415;0.45;0.538;0.554;1" dur="13s" repeatCount="indefinite"/>
-  </text>
+  <!-- ===== FLASH : USAGE LIMIT REACHED + 100% bar (split second) ===== -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.474;0.476;0.497;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
+    <text x="440" y="108" class="mono" font-size="32" font-weight="700" fill="#f0f6fc" text-anchor="middle">USAGE LIMIT REACHED</text>
+    <text x="440" y="140" class="mono" font-size="15" fill="#7d8590" text-anchor="middle">resets in 4:59:59</text>
+    <rect x="180" y="166" width="520" height="16" rx="8" fill="#30363d"/>
+    <rect x="180" y="166" width="520" height="16" rx="8" fill="#f85149"/>
+    <text x="440" y="212" class="mono" font-size="14" fill="#f85149" text-anchor="middle">100%</text>
+  </g>
 
   <!-- ===== GLITCH SLICES ===== -->
   <rect x="0" y="70" width="880" height="22" fill="#C15F3C" opacity="0">
-    <animate attributeName="opacity" values="0;0;0.9;0;0;0" keyTimes="0;0.556;0.562;0.57;0.60;1" dur="13s" calcMode="discrete" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0.9;0;0;0" keyTimes="0;0.630;0.637;0.645;0.655;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
   </rect>
   <rect x="0" y="150" width="880" height="16" fill="#221D17" opacity="0">
-    <animate attributeName="opacity" values="0;0;0;0.85;0;0" keyTimes="0;0.556;0.566;0.572;0.585;1" dur="13s" calcMode="discrete" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0;0.85;0;0" keyTimes="0;0.630;0.640;0.646;0.652;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
   </rect>
 
-  <!-- ===== SCENE D : the brand ===== -->
+  <!-- ===== BRAND (hold ~5s) ===== -->
   <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.598;0.605;1" dur="13s" calcMode="discrete" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.640;0.648;1" dur="14.5s" calcMode="discrete" repeatCount="indefinite"/>
     <text x="60" y="74" class="mono" font-size="18" font-weight="500" fill="#9C8F79" letter-spacing="3">usage limit reached</text>
     <text x="60" y="160" class="mono" font-size="40" font-weight="500" fill="#221D17">usage limit reached</text>
     <rect x="524" y="135" width="18" height="30" fill="#C15F3C">
